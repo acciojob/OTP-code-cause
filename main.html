@@ -1,16 +1,103 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTP Verification</title>
+  <style>
+    /* Your CSS code here */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #verification_heading {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+
+    #verification_subtext {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 2rem;
+    }
+
+    .code-container {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .code {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      font-size: 1.5rem;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .code:focus {
+      border-color: #007bff;
+    }
+
+    .code::placeholder {
+      color: #ccc;
+    }
+  </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+  <div class="container">
+    <h1 id="verification_heading">Verify Your Account</h1>
+    <p id="verification_subtext">Enter the 6-digit code sent to your email to complete the verification process.</p>
+    <div class="code-container">
+      <input type="text" class="code" id="code-1" maxlength="1" placeholder="0" data-index="0">
+      <input type="text" class="code" id="code-2" maxlength="1" placeholder="0" data-index="1">
+      <input type="text" class="code" id="code-3" maxlength="1" placeholder="0" data-index="2">
+      <input type="text" class="code" id="code-4" maxlength="1" placeholder="0" data-index="3">
+      <input type="text" class="code" id="code-5" maxlength="1" placeholder="0" data-index="4">
+      <input type="text" class="code" id="code-6" maxlength="1" placeholder="0" data-index="5">
+    </div>
+  </div>
+  <script>
+    // Your JS code here
+    let inputs = document.querySelectorAll(".code");
 
+    // Focus the first input field on page load
+    inputs[0].focus();
+
+    for (let i = 0; i < inputs.length; i++) {
+      // Handle typing forward
+      inputs[i].addEventListener("input", () => {
+        if (inputs[i].value.length === 1 && i < inputs.length - 1) {
+          inputs[i + 1].focus(); // Move focus to the next field
+        }
+      });
+
+      // Handle backspace
+      inputs[i].addEventListener("keydown", (e) => {
+        if (e.key === "Backspace" && inputs[i].value === "" && i > 0) {
+          inputs[i - 1].value = ""; // Clear the previous field
+          inputs[i - 1].focus(); // Move focus to the previous field
+        }
+      });
+    }
+  </script>
 </body>
-
 </html>
